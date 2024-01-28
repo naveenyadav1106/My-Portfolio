@@ -173,12 +173,13 @@ const Navbar = () => {
                 <NavItems>
                     <NavLink href='#about'>About</NavLink>
                     <NavLink href='#skills'>Skills</NavLink>
-                    <NavLink href='#experience'>Experience</NavLink>
                     <NavLink href='#projects'>Projects</NavLink>
                     <NavLink href='#education'>Education</NavLink>
                 </NavItems>
                 <ButtonContainer>
-                    <GithubButton>Github Profile</GithubButton>
+                    <GithubButton href='https://github.com/naveenyadav1106' target="_blank">
+                        Github Profile
+                    </GithubButton>
                 </ButtonContainer>
             </NavContainer>
             {
@@ -231,7 +232,7 @@ const Navbar = () => {
                                 color: 'white',
                                 width: 'max-content'
                             }}
-                            href='/'
+                            href='https://github.com/naveenyadav1106'
                             target="_blank"
                         >
                             Github Profile
