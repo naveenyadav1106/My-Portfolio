@@ -53,7 +53,7 @@ display:none;
     font-size:1.5rem;
     cursor:pointer;
     color:${({ theme }) => theme.text_primary}
-};
+}
 `;
 
 const NavItems = styled.ul`
@@ -101,33 +101,35 @@ font-size: 18px;
 `;
 
 const MobileMenu = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-gap: 16px;
-top: 80;
-right: 0;
-width:100%;
-padding: 42px 40px 24px 40px;
-background: ${({ theme }) => theme.card_light + 99};
-transition: all 0.3s ease-in-out;
-transition: ${({ open }) => open ? 'translateX(0)' : 'translateX(100 %)'};
-border-radius: 0 0 20px 20px;
-box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-opacity: ${({ open }) => open ? '1' : '0'};
-z-index: ${({ open }) => open ? '1' : '-1'};
-`;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 100%;
+    padding: 12px 40px 24px 40px;
+    background: ${({ theme }) => theme.card_light + 99};
+    transition: all 0.6s ease-in-out;
+    transform: ${({ open }) => (open ? 'translateY(0)' : 'translateY(-100%)')};
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    opacity: ${({ open }) => (open ? '100%' : '0')};
+    z-index: ${({ open }) => (open ? '1000' : '-1000')};
 
-const MobileMenuLinks = styled(LinkR)`
-color: ${({ theme }) => theme.text_primary};
-font-weight: 500;
-cursor: pointer;
-text-decoration: none;
-transition: all 0.2s ease-in-out;
-&:hover{
-color:${({ theme }) => theme.primary};
-};
-`;
+`
+
+// const MobileLink = styled(LinkR)`
+// color: ${({ theme }) => theme.text_primary};
+// font-weight: 500;
+// cursor: pointer;
+// text-decoration: none;
+// transition: all 0.2s ease-in-out;
+// &:hover{
+// color:${({ theme }) => theme.primary};
+// };
+// `;
 
 const GithubButton = styled.a`
   border: 1.8px solid ${({ theme }) => theme.primary};
@@ -151,6 +153,22 @@ const GithubButton = styled.a`
     font-size: 14px;
     }
 `;
+
+const MobileLink = styled.a`
+  color: ${({ theme }) => theme.text_primary};
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  :hover {
+    color: ${({ theme }) => theme.primary};
+  }
+
+  &.active {
+    border-bottom: 2px solid ${({ theme }) => theme.primary};
+  }
+`;
+
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
@@ -181,65 +199,57 @@ const Navbar = () => {
                         Github Profile
                     </GithubButton>
                 </ButtonContainer>
+                {
+                    open && (
+                        <MobileMenu open={open} >
+                            <MobileLink
+                                href='#about'
+                                onClick={() => {
+                                    setOpen(!open)
+                                }}
+                            >
+                                About
+                            </MobileLink>
+                            <MobileLink
+                                href='#skills'
+                                onClick={() => {
+                                    setOpen(!open)
+                                }}
+                            >
+                                Skills
+                            </MobileLink>
+                            <MobileLink
+                                href='#projects'
+                                onClick={() => {
+                                    setOpen(!open)
+                                }}
+                            >
+                                Projects
+                            </MobileLink>
+                            <MobileLink
+                                href='#education'
+                                onClick={() => {
+                                    setOpen(!open)
+                                }}
+                            >
+                                Education
+                            </MobileLink>
+                            <GithubButton
+                                style={{
+                                    padding: "10px 16px",
+                                    background: '${theme.primary}',
+                                    color: 'white',
+                                    width: 'max-content'
+                                }}
+                                href='https://github.com/naveenyadav1106'
+                                target="_blank"
+                            >
+                                Github Profile
+                            </GithubButton>
+                        </MobileMenu>
+                    )
+                }
             </NavContainer>
-            {
-                open && (
-                    <MobileMenu open={open} >
-                        <MobileMenuLinks
-                            href='#about'
-                            onClick={() => {
-                                setOpen(!open)
-                            }}
-                        >
-                            About
-                        </MobileMenuLinks>
-                        <MobileMenuLinks
-                            href='#skills'
-                            onClick={() => {
-                                setOpen(!open)
-                            }}
-                        >
-                            Skills
-                        </MobileMenuLinks>
-                        <MobileMenuLinks
-                            href='#experience'
-                            onClick={() => {
-                                setOpen(!open)
-                            }}
-                        >
-                            Experience
-                        </MobileMenuLinks>
-                        <MobileMenuLinks
-                            href='#projects'
-                            onClick={() => {
-                                setOpen(!open)
-                            }}
-                        >
-                            Projects
-                        </MobileMenuLinks>
-                        <MobileMenuLinks
-                            href='#education'
-                            onClick={() => {
-                                setOpen(!open)
-                            }}
-                        >
-                            Education
-                        </MobileMenuLinks>
-                        <GithubButton
-                            style={{
-                                padding: "10px 16px",
-                                background: '${theme.primary}',
-                                color: 'white',
-                                width: 'max-content'
-                            }}
-                            href='https://github.com/naveenyadav1106'
-                            target="_blank"
-                        >
-                            Github Profile
-                        </GithubButton>
-                    </MobileMenu>
-                )
-            }
         </Nav >
     )
 };
